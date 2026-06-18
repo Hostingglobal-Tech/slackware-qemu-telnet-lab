@@ -1,0 +1,23 @@
+# Do not commit historical OS media or local VM disks.
+*.flp
+*.img
+*.iso
+*.vmdk
+*.vdi
+*.qcow2
+*.raw
+*.log
+*.scoreboard
+nvram
+
+# Local paths and screenshots.
+local/
+screenshots/
+*.png
+*.jpg
+
+# Editor / OS noise.
+.DS_Store
+Thumbs.db
+desktop.ini
+

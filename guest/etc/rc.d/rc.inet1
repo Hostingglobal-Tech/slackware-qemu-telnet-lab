@@ -1,0 +1,27 @@
+#!/bin/sh
+# Slackware 2.0.0 QEMU NE2000 static networking.
+
+HOSTNAME="darkstar"
+IPADDR="192.168.1.100"
+NETMASK="255.255.255.0"
+NETWORK="192.168.1.0"
+BROADCAST="192.168.1.255"
+GATEWAY="192.168.1.1"
+
+/bin/hostname $HOSTNAME 2>/dev/null || true
+
+# Loopback first.
+/sbin/ifconfig lo 127.0.0.1 2>/dev/null || true
+/sbin/route add -net 127.0.0.0 2>/dev/null || true
+
+# The QEMU net boot kernel exposes an NE2000-compatible eth0 at 0x300/IRQ 9.
+# Old /proc/net/dev checks are unreliable here, so configure and let ifconfig
+# report the real failure if the NIC is absent.
+/sbin/ifconfig eth0 $IPADDR netmask $NETMASK broadcast $BROADCAST up
+
+# Add the directly connected network before adding the default gateway.
+/sbin/route add -net $NETWORK netmask $NETMASK eth0 2>/dev/null || \
+  /sbin/route add -net $NETWORK netmask $NETMASK 2>/dev/null || true
+/sbin/route add default gw $GATEWAY metric 1 2>/dev/null || \
+  /sbin/route add default gw $GATEWAY 2>/dev/null || true
+
