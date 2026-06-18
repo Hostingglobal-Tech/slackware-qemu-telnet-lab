@@ -1,5 +1,9 @@
 # Slackware 2.0.0 QEMU Telnet Lab
 
+![Slackware 2.0.0 QEMU boot and telnet demo](assets/slackware-qemu-boot-login.gif)
+
+[MP4 데모 영상 보기](assets/slackware-qemu-boot-login.mp4)
+
 1994년 Slackware Linux 2.0.0을 Windows 호스트의 QEMU에서 부팅하고, `eth0`에 정적 IP를 넣은 뒤 telnet으로 접속해서 작업할 수 있게 만든 실험 저장소입니다.
 
 핵심 목표는 단순합니다.
@@ -63,6 +67,12 @@ telnet_ok
 - 게스트의 `/etc/rc.d/rc.inet1` 정적 IP 설정 예시
 - telnet 접속 검증 스크립트
 - 실제 삽질 기록과 문제 해결 문서
+
+편의를 위해 GitHub Release에는 실험에서 사용한 패치된 부트 플로피 `net144-mount-hda1.flp`도 asset으로 올립니다. 이 파일은 원본 Slackware `net144.flp`의 `mount` 라벨을 `/dev/hda1` 부팅용으로 바꾼 것입니다.
+
+직접 만들고 싶다면 Release 파일을 받지 말고 아래 `patch-net144-mount-hda1.ps1` 절차로 본인의 `net144.flp`를 패치하면 됩니다.
+
+Slackware, Linux 커널, 포함된 유틸리티의 권리는 각 원 저작권자와 라이선스에 따릅니다. Release asset은 레트로 실험 재현을 쉽게 하기 위한 패치된 부트 플로피이며, 설치 디스크나 완성된 하드디스크 이미지는 포함하지 않습니다.
 
 ## 전체 구조
 
