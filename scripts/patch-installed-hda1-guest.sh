@@ -87,6 +87,15 @@ else
   echo 'telnet stream tcp nowait root /usr/sbin/in.telnetd in.telnetd' >> "${MNT}/etc/inetd.conf"
 fi
 
+backup_once "${MNT}/etc/inittab"
+if [[ -f "${MNT}/etc/inittab" ]]; then
+  if grep -qE '^c1:12345:respawn:' "${MNT}/etc/inittab"; then
+    perl -0pi -e 's#^c1:12345:respawn:.*$#c1:12345:respawn:/sbin/agetty 38400 tty1#m' "${MNT}/etc/inittab"
+  else
+    echo 'c1:12345:respawn:/sbin/agetty 38400 tty1' >> "${MNT}/etc/inittab"
+  fi
+fi
+
 sync
 
 cat <<EOF
@@ -99,7 +108,7 @@ Installed:
   /etc/securetty         ttyp0-ttyp9 allowed for root telnet login
   /etc/services          telnet 23/tcp
   /etc/inetd.conf        in.telnetd enabled
+  /etc/inittab           tty1 uses agetty login prompt
 
 Backups are saved as *.before-qemu-telnet-lab inside the guest filesystem.
 EOF
-

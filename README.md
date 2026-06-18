@@ -1,8 +1,10 @@
-# Slackware 2.0.0 QEMU Telnet Lab
+# 1994년 7월 Slackware 2.0.0 QEMU Telnet Lab
 
 ![Slackware 2.0.0 QEMU boot and telnet demo](assets/slackware-qemu-boot-login.gif)
 
 [MP4 데모 영상 보기](assets/slackware-qemu-boot-login.mp4)
+
+데모 영상은 QEMU 콘솔 화면만 캡처합니다. 부팅 후 `root`로 로그인하고, `ifconfig`로 `eth0`와 `192.168.1.100`을 확인한 뒤, `ps ax`에서 `/usr/sbin/inetd`가 떠 있는 것과 `inetd.conf`의 telnet 설정을 확인합니다.
 
 1994년 Slackware Linux 2.0.0을 Windows 호스트의 QEMU에서 부팅하고, `eth0`에 정적 IP를 넣은 뒤 telnet으로 접속해서 작업할 수 있게 만든 실험 저장소입니다.
 
